@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css">
+
+</head>
+
+<body class="bg-blue-900 box-border">
+    <div class="hidden loading-screen fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black z-50 items-center justify-center">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <div class="container px-5 my-10 m-auto">
+        <nav
+            class="navbar bg-opacity-50 flex sm:flex-row flex-col gap-2 items-center bg-white sm:justify-between sm:p-4 p-4 rounded-xl mb-10">
+            <h1 class="text-2xl  ">Weather App</h1>
+            <div class="search relative " id="search_container">
+
+                <input class="border-solid border-gray-300 border-2 rounded-lg bg-gray-200 w-full sm:w-80 px-2 py-1"
+                    placeholder="Enter City" type="text" name="city_name" id="city">
+                    <button
+                    class="hidden sm:inline border-blue-900 hover:bg-blue-900 hover:text-white border-2 rounded-lg px-2 py-1"
+                    id="search_button" type="submit">Search</button>
+                    
+                <ul id="suggestions"
+                    class="overflow-y-auto max-h-40 mt-1 hidden bg-gray-200 rounded-xl shadow-xl w-full sm:w-80 absolute left-0 z-10 text-lg p-2">
+
+
+                </ul>
+            </div>
+
+        </nav>
+        <div class="main bg-opacity-50 bg-white rounded-xl sm:p-4 p-1 flex lg:flex-row flex-col">
+            <div class="left p-2 sm:p-5 lg:w-3/5">
+                <div class="current_details flex justify-between w-full  ">
+                    <div class="details1">
+                        <h1 class="xl:text-6xl sm:text-4xl text-2xl mt-5 mb-1 " id="location-name">Kolkata</h1>
+                        <p id="state-country" class="sm:text-xl text-sm mb-10 text-gray-700">West Bengal , India</p>
+                        <p class="xl:text-8xl sm:text-5xl text-3xl font-bold my-5" id="temperature">35</p>
+                    </div>
+                    <div class="image flex items-center">
+                        <img id="condition-image-main" class="w-32 sm:w-40" src="//cdn.weatherapi.com/weather/64x64/day/143.png"
+                            alt="">
+                    </div>
+                </div>
+                <div class="today_forecast py-5">
+                    <p class="text-gray-700 mb-2 font-bold text-sm sm:text-lg xl:text-xl">TODAY'S FORECAST</p>
+                    <div class="hourly-updates grid grid-cols-6">
+                        <div class="6-am flex items-center flex-col">
+                            <p class="time text-gray-700 font-semibold xl:text-xl sm:text-base text-xs my-2">6:00 am</p>
+                            <img id="6am-img" src="" alt="">
+                            <p class="text1 sm:text-lg xl:text-2xl text-sm font-semibold my-2" id="6am-temp">35</p>
+                        </div>
+                        <div class="9-am flex items-center flex-col">
+                            <p class="time text-gray-700 font-semibold xl:text-xl   sm:text-base text-xs  my-2">9:00 am</p>
+                            <img id="9am-img" src="" alt="">
+                            <p class="text1 sm:text-lg xl:text-2xl text-sm font-semibold my-2" id="9am-temp">35</p>
+                        </div>
+                        <div class="12-pm flex items-center text-center flex-col">
+                            <p class="time text-gray-700 font-semibold xl:text-xl  sm:text-base text-xs   my-2">12:00 pm</p>
+                            <img id="12pm-img" src="" alt="">
+                            <p class="text1 sm:text-lg xl:text-2xl text-sm font-semibold my-2" id="12pm-temp">35</p>
+                        </div>
+                        <div class="3-pm flex items-center flex-col">
+                            <p class="time text-gray-700 font-semibold xl:text-xl   sm:text-base text-xs  my-2">3:00 pm</p>
+                            <img id="3pm-img" src="" alt="">
+                            <p class="text1 sm:text-lg xl:text-2xl text-sm font-semibold my-2" id="3pm-temp">35</p>
+                        </div>
+                        <div class="6-pm flex items-center flex-col">
+                            <p class="time text-gray-700 font-semibold xl:text-xl   sm:text-base text-xs  my-2">6:00 pm</p>
+                            <img id="6pm-img" src="" alt="">
+                            <p class="text1 sm:text-lg xl:text-2xl text-sm font-semibold my-2" id="6pm-temp">35</p>
+                        </div>
+                        <div class="9-pm flex items-center flex-col">
+                            <p class="time text-gray-700 font-semibold xl:text-xl  sm:text-base text-xs  my-2">9:00 pm</p>
+                            <img id="9pm-img" src="" alt="">
+                            <p class="text1 sm:text-lg xl:text-2xl text-sm font-semibold my-2" id="9pm-temp">35</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="air-conditions">
+                    <p class="text-gray-700 mb-2 font-bold text-sm sm:text-lg xl:text-xl">AIR CONDITIONS</p>
+                    <div class="conditons grid grid-cols-2">
+                        <div class="condition">
+
+                            <p class="text-gray-700 my-2 text-sm sm:text-lg xl:text-xl">Real Feel</p>
+                            <p id="feel_temp" class="text1  text-sm sm:text-lg xl:text-2xl font-semibold my-2">30</p>
+                        </div>
+                        <div class="condition">
+                            <p class="text-gray-700 my-2 text-sm sm:text-lg xl:text-xl">Wind</p>
+                            <p id="wind_kph" class="text1  text-sm sm:text-lg xl:text-2xl font-semibold my-2">30</p>
+                        </div>
+                        <div class="condition">
+                            <p class="text-gray-700 my-2 text-sm sm:text-lg xl:text-xl">Chance of Rain</p>
+                            <p id="rain_chance" class="text1  text-sm sm:text-lg xl:text-2xl font-semibold my-2">30</p>
+                        </div>
+                        <div class="condition">
+                            <p class="text-gray-700 my-2 text-sm sm:text-lg xl:text-xl">UV Index</p>
+                            <p id="uv_index" class="text1 text-sm sm:text-lg xl:text-2xl font-semibold my-2">30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right p-2 sm:p-5 border-t lg:border-l lg:border-t-0 border-gray-500 lg:w-2/5">
+                <h2 class="text-gray-700 text-sm sm:text-lg xl:text-xl font-bold mt-5">7-DAY FORECAST</h2>
+                <div class="7days mt-10 text-xs sm:text-base xl:text-xl flex flex-col gap-7">
+                    <div class="day grid">
+                        <div class="dayName">
+                            <p class="day1Name text-gray-700 font-semibold">Today</p>
+                        </div>
+                        <div class="condition flex items-center">
+                            <img class="day1ConditionImg " src="//cdn.weatherapi.com/weather/64x64/day/143.png" alt="">
+                            <p class="day1Condition  font-bold">Sunny</p>
+                        </div>
+                        <div class="temp_data flex justify-end">
+                            <span class="day1MaxTemp font-bold">36</span>
+                            <span class="day1MinTemp font-medium text-gray-700">/26</span>
+                        </div>
+                    </div>
+                    <div class="day grid">
+                        <div class="dayName">
+                            <p class="day1Name text-gray-700 font-semibold">Today</p>
+                        </div>
+                        <div class="condition flex items-center">
+                            <img class="day1ConditionImg " src="//cdn.weatherapi.com/weather/64x64/day/143.png" alt="">
+                            <p class="day1Condition  font-bold">Sunny</p>
+                        </div>
+                        <div class="temp_data flex justify-end">
+                            <span class="day1MaxTemp font-bold">36</span>
+                            <span class="day1MinTemp font-medium text-gray-700">/26</span>
+                        </div>
+                    </div>
+                    <div class="day grid">
+                        <div class="dayName">
+                            <p class="day1Name text-gray-700 font-semibold">Today</p>
+                        </div>
+                        <div class="condition flex items-center">
+                            <img class="day1ConditionImg " src="//cdn.weatherapi.com/weather/64x64/day/143.png" alt="">
+                            <p class="day1Condition  font-bold">Sunny</p>
+                        </div>
+                        <div class="temp_data flex justify-end">
+                            <span class="day1MaxTemp font-bold">36</span>
+                            <span class="day1MinTemp font-medium text-gray-700">/26</span>
+                        </div>
+                    </div>
+                    <div class="day grid">
+                        <div class="dayName">
+                            <p class="day1Name text-gray-700 font-semibold">Today</p>
+                        </div>
+                        <div class="condition flex items-center">
+                            <img class="day1ConditionImg " src="//cdn.weatherapi.com/weather/64x64/day/143.png" alt="">
+                            <p class="day1Condition  font-bold">Sunny</p>
+                        </div>
+                        <div class="temp_data flex justify-end">
+                            <span class="day1MaxTemp font-bold">36</span>
+                            <span class="day1MinTemp font-medium text-gray-700">/26</span>
+                        </div>
+                    </div>
+                    <div class="day grid">
+                        <div class="dayName">
+                            <p class="day1Name text-gray-700 font-semibold">Today</p>
+                        </div>
+                        <div class="condition flex items-center">
+                            <img class="day1ConditionImg " src="//cdn.weatherapi.com/weather/64x64/day/143.png" alt="">
+                            <p class="day1Condition  font-bold">Sunny</p>
+                        </div>
+                        <div class="temp_data flex justify-end">
+                            <span class="day1MaxTemp font-bold">36</span>
+                            <span class="day1MinTemp font-medium text-gray-700">/26</span>
+                        </div>
+                    </div>
+                    <div class="day grid">
+                        <div class="dayName">
+                            <p class="day1Name text-gray-700 font-semibold">Today</p>
+                        </div>
+                        <div class="condition flex items-center">
+                            <img class="day1ConditionImg " src="//cdn.weatherapi.com/weather/64x64/day/143.png" alt="">
+                            <p class="day1Condition  font-bold">Sunny</p>
+                        </div>
+                        <div class="temp_data flex justify-end">
+                            <span class="day1MaxTemp font-bold">36</span>
+                            <span class="day1MinTemp font-medium text-gray-700">/26</span>
+                        </div>
+                    </div>
+                    <div class="day grid">
+                        <div class="dayName">
+                            <p class="day1Name text-gray-700 font-semibold">Today</p>
+                        </div>
+                        <div class="condition flex items-center">
+                            <img class="day1ConditionImg " src="//cdn.weatherapi.com/weather/64x64/day/143.png" alt="">
+                            <p class="day1Condition  font-bold">Sunny</p>
+                        </div>
+                        <div class="temp_data flex justify-end">
+                            <span class="day1MaxTemp font-bold">36</span>
+                            <span class="day1MinTemp font-medium text-gray-700">/26</span>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+
+</html>

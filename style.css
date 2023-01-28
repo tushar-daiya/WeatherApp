@@ -1,0 +1,23 @@
+.loading-spinner {
+    border: 4px solid #f3f3f3; /* set the border color */
+    border-top: 4px solid #3498db; /* set the color of the top border */
+    border-radius: 50%; /* make the spinner a circle */
+    width: 40px; /* set the width and height of the spinner */
+    height: 40px;
+    animation: spin 1s linear infinite; /* animate the spinner */
+}
+
+/* Define the keyframes for the spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.navbar{
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, .5);
+}
+
+.day{
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+}
